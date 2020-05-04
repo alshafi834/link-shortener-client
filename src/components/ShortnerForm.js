@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./ShortnerForm.css";
 
 const ShortnerForm = () => {
   const [longUrl, setLongUrl] = useState("");
   const [finalUrl, setFinalUrl] = useState(null);
+
+  const urlLink = useRef(null);
+
+  const copyLink = () => {
+    console.log(urlLink.current.childNodes[0].data);
+
+    const elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value = urlLink.current.childNodes[0].data;
+    elem.select();
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -41,8 +55,10 @@ const ShortnerForm = () => {
       {finalUrl ? (
         <div>
           <div className="short-url">
-            <a href={finalUrl.data.shortUrl}>{finalUrl.data.shortUrl}</a>
-            <button>Copy Url</button>
+            <a ref={urlLink} href={finalUrl.data.shortUrl}>
+              {finalUrl.data.shortUrl}
+            </a>
+            <button onClick={copyLink}>Copy Url</button>
           </div>
           <table>
             <tr>
