@@ -33,4 +33,12 @@ th,
 td {
   border: 2px solid rgb(209, 209, 209);
   padding: 8px;
+  word-wrap: break-word;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  table {
+    table-layout: fixed;
+    width: 310px;
+  }
 }
