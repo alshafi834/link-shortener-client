@@ -1,0 +1,12 @@
+.header {
+  margin-bottom: 50px;
+}
+span.link {
+  color: rgb(38, 184, 104);
+  font-size: 22px;
+}
+span.shortener {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}

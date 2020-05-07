@@ -1,0 +1,27 @@
+.container {
+  width: 85%;
+  margin: auto;
+  padding-top: 5%;
+}
+
+.shortner-form {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+}
+input {
+  width: 80%;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+.shortner-form button {
+  width: 20%;
+  padding: 0 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(44, 44, 44);
+}

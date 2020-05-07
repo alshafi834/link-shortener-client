@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import "./ShortnerForm.css";
+import "./Shortener.css";
+import Header from "./Header";
+import ShortLink from "./ShortLink";
 
-const ShortnerForm = () => {
+const Shortener = () => {
   const [longUrl, setLongUrl] = useState("");
   const [finalUrl, setFinalUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const urlLink = useRef(null);
 
@@ -17,10 +21,12 @@ const ShortnerForm = () => {
     elem.select();
     document.execCommand("copy");
     document.body.removeChild(elem);
+    setIsCopied(true);
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const srtUrl = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/url/shorten`,
@@ -34,6 +40,7 @@ const ShortnerForm = () => {
         }
       );
       setFinalUrl(srtUrl);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -43,39 +50,29 @@ const ShortnerForm = () => {
   };
   return (
     <div className="container">
+      <Header />
       <form onSubmit={submitHandler} className="shortner-form">
         <input
           type="text"
           value={longUrl}
-          onChange={(event) => setLongUrl(event.target.value)}
+          onChange={(event) => {
+            setLongUrl(event.target.value);
+            setFinalUrl(null);
+            setIsCopied(false);
+          }}
           placeholder="Pase your link"
         />
         <button type="submit">Submit</button>
       </form>
-      {finalUrl ? (
-        <div>
-          <div className="short-url">
-            <a ref={urlLink} href={finalUrl.data.shortUrl}>
-              {finalUrl.data.shortUrl}
-            </a>
-            <button onClick={copyLink}>Copy Url</button>
-          </div>
-          <table>
-            <tr>
-              <th>Long URl</th>
-              <th>Short Url</th>
-              <th>Created at</th>
-            </tr>
-            <tr>
-              <td>{finalUrl.data.longUrl}</td>
-              <td>{finalUrl.data.shortUrl}</td>
-              <td>{new Date(finalUrl.data.date).toLocaleString()}</td>
-            </tr>
-          </table>
-        </div>
-      ) : null}
+      <ShortLink
+        finalUrl={finalUrl}
+        urlLink={urlLink}
+        copyLink={copyLink}
+        loading={loading}
+        isCopied={isCopied}
+      />
     </div>
   );
 };
 
-export default ShortnerForm;
+export default Shortener;

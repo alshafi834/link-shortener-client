@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import ShortnerForm from "./components/ShortnerForm";
+import Shortener from "./components/Shortener";
 
 function App() {
   return (
     <div className="App">
-      <ShortnerForm />
+      <Shortener />
     </div>
   );
 }
