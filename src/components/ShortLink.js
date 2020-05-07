@@ -4,7 +4,7 @@ import "./ShortLink.css";
 const ShortLink = ({ finalUrl, urlLink, copyLink, loading, isCopied }) => {
   return (
     <div>
-      {loading ? <h3 className="loading">Creating short URL</h3> : null}
+      {loading ? <h3 className="loading">Creating short URL...</h3> : null}
       {finalUrl ? (
         <div>
           <div className="short-url">
