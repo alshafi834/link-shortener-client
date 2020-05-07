@@ -27,6 +27,8 @@ table {
   margin: 25px auto;
   border-collapse: collapse;
   color: white;
+  width: 100%;
+  table-layout: fixed;
 }
 table,
 th,

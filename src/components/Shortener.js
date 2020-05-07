@@ -45,8 +45,8 @@ const Shortener = () => {
       console.log(error);
     }
 
-    console.log(longUrl);
-    console.log(finalUrl);
+    //console.log(longUrl);
+    //console.log(finalUrl);
   };
   return (
     <div className="container">
